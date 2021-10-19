@@ -1,0 +1,33 @@
+{
+  "name": "naregua_back",
+  "version": "1.0.0",
+  "description": "Aplicação voltada à serviços esteticos",
+  "main": "src/server.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1",
+    "start": "node src/server.js",
+    "dev": "nodemon src/server.js"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/UFAPE-Projetao20202/naregua_back.git"
+  },
+  "author": "",
+  "license": "ISC",
+  "bugs": {
+    "url": "https://github.com/UFAPE-Projetao20202/naregua_back/issues"
+  },
+  "homepage": "https://github.com/UFAPE-Projetao20202/naregua_back#readme",
+  "dependencies": {
+    "cors": "^2.8.5",
+    "dotenv": "^10.0.0",
+    "express": "^4.17.1",
+    "pg": "^8.7.1",
+    "pg-hstore": "^2.3.4",
+    "sequelize": "^6.7.0"
+  },
+  "devDependencies": {
+    "nodemon": "^2.0.13",
+    "sequelize-cli": "^6.2.0"
+  }
+}
