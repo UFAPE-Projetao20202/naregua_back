@@ -3,3 +3,5 @@ node_modules/
 
 // erros
 yarn-error.log
+
+.env
