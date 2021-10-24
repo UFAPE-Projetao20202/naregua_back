@@ -12,6 +12,9 @@ class CreateUserUseCase {
     if (!password || !String(password).trim())
       throw new AppError('Informe a senha.');
 
+    if (password.length < 6)
+      throw new AppError('A senha deve ter no mínimo 6 caracteres.');
+
     if ((!email || !String(email).trim()) && (!phone || !String(phone).trim()))
       throw new AppError('Informe o email ou telefone.');
 
