@@ -1,3 +1,4 @@
+const { hash } = require('bcryptjs');
 const AppError = require('../../../../errors/AppError');
 const { UsersRepository } = require('../../repositories/UsersRepository');
 
@@ -27,10 +28,12 @@ class CreateUserUseCase {
         throw new AppError('Já existe um usuário com esse número de telefone.');
     }
 
+    const passwordHash = await hash(password, 8);
+
     const user = await usersRepository.create({
       name,
       email,
-      password,
+      password: passwordHash,
       phone,
     });
 
