@@ -14,7 +14,6 @@ class CreateUserUseCase {
 
     if (email) {
       const userEmailAlreadyExists = await usersRepository.findByEmail(email);
-      console.log(userEmailAlreadyExists);
 
       if (userEmailAlreadyExists)
         throw new Error('Já existe um usuário com esse email.');
@@ -22,7 +21,6 @@ class CreateUserUseCase {
 
     if (phone) {
       const userPhoneAlreadyExists = await usersRepository.findByPhone(phone);
-      console.log(userPhoneAlreadyExists);
 
       if (userPhoneAlreadyExists)
         throw new Error('Já existe um usuário com esse número de telefone.');
