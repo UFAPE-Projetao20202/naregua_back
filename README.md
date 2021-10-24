@@ -38,3 +38,11 @@ Para reverter uma migration:
 ```
 npx sequelize db:migrate:undo
 ```
+
+## Testes
+
+Para rodar os testes da aplicação:
+
+```
+npm run test
+```
