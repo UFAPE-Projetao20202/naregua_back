@@ -1,7 +1,9 @@
 const Sequelize = require('sequelize');
 const databaseConfig = require('../config/database');
 
-const models = [];
+const { User } = require('../modules/accounts/models/User');
+
+const models = [User];
 
 class Database {
   constructor() {
@@ -12,9 +14,10 @@ class Database {
     this.connection = new Sequelize(databaseConfig);
     //this.connection.authenticate().then(() => console.log('Database connection OK!'));
 
-    models
-      .map(model => model.init(this.connection))
-      .map(model => model.associate && model.associate(this.connection.models));
+    models.map(model => model.init(this.connection));
+    models.map(
+      model => model.associate && model.associate(this.connection.models),
+    );
   }
 }
 
