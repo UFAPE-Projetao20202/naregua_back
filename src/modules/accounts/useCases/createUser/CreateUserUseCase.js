@@ -1,4 +1,5 @@
 const { hash } = require('bcryptjs');
+const Cryptr = require('cryptr');
 const AppError = require('../../../../errors/AppError');
 
 class CreateUserUseCase {
@@ -36,12 +37,15 @@ class CreateUserUseCase {
         throw new AppError('Já existe um usuário com esse número de telefone.');
     }
 
-    const passwordHash = await hash(password, 8);
+      //const passwordHash = await hash(password, 8);
+      const cryptr = new Cryptr('MySecretKey'); // colocar chave
+      const passwordEncrypted = cryptr.encrypt(password);
 
     const user = await this.usersRepository.create({
       name,
       email,
-      password: passwordHash,
+        password: passwordEncrypted,
+      //password: passwordHash,
       phone,
     });
 
