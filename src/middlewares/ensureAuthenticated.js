@@ -17,10 +17,7 @@ async function ensureAuthenticated(request, response, next) {
 
   try {
     // verifica se o token informado é valido.
-    console.log(token);
     const { sub: user_id } = verify(token, SECRET);
-
-    console.log(user_id);
 
     const usersRepostory = new UsersRepository();
 
