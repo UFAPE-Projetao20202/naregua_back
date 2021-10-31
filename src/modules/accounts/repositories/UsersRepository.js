@@ -14,6 +14,10 @@ class UsersRepository {
   async findByPhone(phone) {
     return await User.findOne({ where: { phone } });
   }
+
+  async findById(id) {
+    return await User.findOne({ where: { id } });
+  }
 }
 
 module.exports = { UsersRepository };
