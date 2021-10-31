@@ -2,6 +2,7 @@ const { compare } = require('bcryptjs');
 const { sign } = require('jsonwebtoken');
 
 const AppError = require('../../../../errors/AppError');
+const { SECRET } = require('../../../../config/secret');
 
 class AuthenticateUseCase {
   constructor(usersRepository) {
@@ -26,7 +27,7 @@ class AuthenticateUseCase {
     if (!passwordMatch) throw new AppError('Email ou senha incorretos!');
 
     // gera o token para autenticação.
-    const token = sign({}, '4f50d63afc971e7c1c98e62572ee489c', {
+    const token = sign({}, SECRET, {
       subject: user.id,
       expiresIn: '1d',
     });
