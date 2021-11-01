@@ -30,6 +30,10 @@ class UsersRepositoryInMemory {
   async findByPhone(phone) {
     return this.users.find(user => user.phone === phone);
   }
+
+  async findById(id) {
+    return this.users.find(user => user.id === id);
+  }
 }
 
 module.exports = { UsersRepositoryInMemory };
