@@ -11,11 +11,11 @@ class ProvidersRepository {
   }
 
   async findById(id) {
-    return await Provide.findOne({ where: { id } });
+    return await Provider.findOne({ where: { id } });
   }
 
   async findByUserId(user_id) {
-    return await Provide.findOne({ where: { user_id } });
+    return await Provider.findOne({ where: { user_id } });
   }
 }
 
