@@ -1,29 +1,30 @@
-const { AuthenticateUseCase } = require('./AuthenticateUseCase');
 const { UsersRepository } = require('../../repositories/UsersRepository');
 const {
   ProvidersRepository,
 } = require('../../repositories/ProvidersRepository');
+const { CreateProviderUseCase } = require('./CreateProviderUseCase');
 
-class AuthenticateController {
+class CreateProviderController {
   constructor() {
     const usersRepository = new UsersRepository();
     const providersRepository = new ProvidersRepository();
-    this.authenticateUseCase = new AuthenticateUseCase(
+    this.createProviderUseCase = new CreateProviderUseCase(
       usersRepository,
       providersRepository,
     );
   }
-
   async handle(request, response) {
-    const { email, password } = request.body;
+    const { name, email, phone, password } = request.body;
 
-    const authenticate = await this.authenticateUseCase.execute({
+    const provider = await this.createProviderUseCase.execute({
+      name,
       email,
+      phone,
       password,
     });
 
-    return response.json(authenticate);
+    return response.status(201).json(provider);
   }
 }
 
-module.exports = { AuthenticateController };
+module.exports = { CreateProviderController };
