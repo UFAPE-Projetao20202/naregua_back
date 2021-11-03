@@ -10,6 +10,14 @@ class ProvidersRepository {
     return provider;
   }
 
+  async findAll() {
+    return await Provider.findAll({
+      include: [
+        { association: 'user', attributes: ['name', 'email', 'phone'] },
+      ],
+    });
+  }
+
   async findById(id) {
     return await Provider.findOne({ where: { id } });
   }
