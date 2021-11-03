@@ -41,8 +41,6 @@ describe('Login de usuário', () => {
       password: user.password,
     });
 
-    console.log(resultAuthenticate);
-
     expect(resultAuthenticate).toHaveProperty('token');
   });
 
