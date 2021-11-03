@@ -9,6 +9,14 @@ class ProvidersRepository {
 
     return provider;
   }
+
+  async findById(id) {
+    return await Provide.findOne({ where: { id } });
+  }
+
+  async findByUserId(user_id) {
+    return await Provide.findOne({ where: { user_id } });
+  }
 }
 
 module.exports = { ProvidersRepository };

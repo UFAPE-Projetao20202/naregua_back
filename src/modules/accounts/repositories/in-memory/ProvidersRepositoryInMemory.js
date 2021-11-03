@@ -20,6 +20,14 @@ class ProvidersRepositoryInMemory {
 
     return provider;
   }
+
+  async findById(id) {
+    return this.providers.find(provider => provider.id === id);
+  }
+
+  async findByUserId(user_id) {
+    return this.providers.find(provider => provider.user_id === user_id);
+  }
 }
 
 module.exports = { ProvidersRepositoryInMemory };

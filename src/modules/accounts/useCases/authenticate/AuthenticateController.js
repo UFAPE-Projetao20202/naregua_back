@@ -1,10 +1,17 @@
 const { AuthenticateUseCase } = require('./AuthenticateUseCase');
 const { UsersRepository } = require('../../repositories/UsersRepository');
+const {
+  ProvidersRepository,
+} = require('../../repositories/ProvidersRepository');
 
 class AuthenticateController {
   constructor() {
     const usersRepository = new UsersRepository();
-    this.authenticateUseCase = new AuthenticateUseCase(usersRepository);
+    const providersRepository = new ProvidersRepository();
+    this.authenticateUseCase = new AuthenticateUseCase(
+      usersRepository,
+      providersRepository,
+    );
   }
 
   async handle(request, response) {

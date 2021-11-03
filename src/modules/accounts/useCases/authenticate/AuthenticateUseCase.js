@@ -5,8 +5,9 @@ const AppError = require('../../../../errors/AppError');
 const { SECRET } = require('../../../../config/secret');
 
 class AuthenticateUseCase {
-  constructor(usersRepository) {
+  constructor(usersRepository, providersRepository) {
     this.usersRepository = usersRepository;
+    this.providersRepository = providersRepository;
   }
 
   async execute({ email, password }) {
@@ -21,6 +22,9 @@ class AuthenticateUseCase {
 
     if (!user) throw new AppError('Email ou senha incorretos!');
 
+    // verifica se é um prestador.
+    const provider = await this.providersRepository.findByUserId(user.id);
+
     // compara as senhas.
     const passwordMatch = await compare(password, user.password);
 
@@ -32,7 +36,10 @@ class AuthenticateUseCase {
       expiresIn: '1d',
     });
 
-    return { user: { name: user.name, email: user.email }, token };
+    return {
+      user: { name: user.name, email: user.email, is_provider: !!provider },
+      token,
+    };
   }
 }
 
