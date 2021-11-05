@@ -22,9 +22,11 @@ class CreateServiceUseCase {
 
     if (!value || !String(value).trim()) throw new AppError('Informe o valor.');
 
-    if (!discount || isNaN(discount)) throw new AppError('Informe o desconto.');
+    if (!discount || isNaN(discount))
+      throw new AppError('Informe o desconto corretamente (number).');
 
-    if (!duration || isNaN(duration)) throw new AppError('Informe a duração.');
+    if (!duration || isNaN(duration))
+      throw new AppError('Informe a duração corretamente (number).');
 
     if (!category_id || !String(category_id).trim())
       throw new AppError('Informe a categoria.');
