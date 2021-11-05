@@ -5,12 +5,19 @@ class ServiceRepository {
     this.services = [];
   }
 
-  async create({ name, description, value, duration, discount, available, category_id, provider_id }) {   
-    
+  async create({
+    name,
+    description,
+    value,
+    duration,
+    discount,
+    available,
+    category_id,
+    provider_id,
+  }) {
     const service = {};
 
     Object.assign(service, {
-      
       id: uuidv4(),
       name,
       description,
@@ -27,7 +34,7 @@ class ServiceRepository {
     this.services.push(service);
 
     return service;
-  } 
+  }
 }
 
 module.exports = { ServiceRepository };

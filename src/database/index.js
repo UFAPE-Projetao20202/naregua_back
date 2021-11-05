@@ -3,8 +3,8 @@ const databaseConfig = require('../config/database');
 
 const { User } = require('../modules/accounts/models/User');
 const { Provider } = require('../modules/accounts/models/Provider');
-const { Category } = require('../modules/accounts/models/Category');
-const { Service } = require('../modules/accounts/models/Service');
+const { Category } = require('../modules/services/models/Category');
+const { Service } = require('../modules/services/models/Service');
 
 const models = [User, Provider, Category, Service];
 
