@@ -7,17 +7,27 @@ class CreateServiceController {
     this.createServiceUseCase = new CreateServiceUseCase(serviceRepository);
   }
   async handle(request, response) {
-    const { name, description, value, duration, discount, available, category_id, provider_id } = request.body;
+    const {
+      name,
+      description,
+      value,
+      duration,
+      discount,
+      available,
+      category_id,
+    } = request.body;
+
+    const { provider_id } = request.user;
 
     const service = await this.createServiceUseCase.execute({
-        name,
-        description,
-        value,
-        duration,
-        discount,
-        available,
-        category_id,
-        provider_id
+      name,
+      description,
+      value,
+      duration,
+      discount,
+      available,
+      category_id,
+      provider_id,
     });
 
     return response.status(201).json(service);
