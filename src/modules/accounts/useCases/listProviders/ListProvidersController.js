@@ -10,7 +10,9 @@ class ListProvidersController {
   }
 
   async handle(request, response) {
-    const providers = await this.listProviders.execute();
+    const { name } = request.query;
+
+    const providers = await this.listProviders.execute({ name });
 
     return response.json(providers);
   }

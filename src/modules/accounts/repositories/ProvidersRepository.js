@@ -1,4 +1,5 @@
 const { Provider } = require('../models/Provider');
+const { Op } = require('sequelize');
 
 class ProvidersRepository {
   async create({ user_id }) {
@@ -10,10 +11,18 @@ class ProvidersRepository {
     return provider;
   }
 
-  async findAll() {
+  async findAll({ name }) {
     return await Provider.findAll({
       include: [
-        { association: 'user', attributes: ['name', 'email', 'phone'] },
+        {
+          association: 'user',
+          attributes: ['name', 'email', 'phone'],
+          where: {
+            name: {
+              [Op.iLike]: `%${name}%`,
+            },
+          },
+        },
       ],
     });
   }

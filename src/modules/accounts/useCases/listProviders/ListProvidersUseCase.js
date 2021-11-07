@@ -2,8 +2,8 @@ class ListProvidersUseCase {
   constructor(providersRepository) {
     this.providersRepository = providersRepository;
   }
-  async execute() {
-    const providers = await this.providersRepository.findAll();
+  async execute({ name }) {
+    const providers = await this.providersRepository.findAll({ name });
 
     return providers;
   }
