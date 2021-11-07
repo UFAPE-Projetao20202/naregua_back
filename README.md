@@ -7,16 +7,16 @@ Crie um arquivo .env na raiz do projeto, copie as variaveis do arquivo .env.exam
 Instale as dependencias:
 
 ```
-npm install
+yarn install
 ```
 
 Inicialize com o comando:
 
 ```
-npm run start
+yarn start
 
 // ou para desenvolvimento com reload automatico
-npm run dev
+yarn dev
 ```
 
 ## Instruções para utilizar o sequelize
@@ -24,19 +24,19 @@ npm run dev
 Para criar uma migration:
 
 ```
-npx sequelize migration:create --name=CreateUser
+yarn sequelize migration:create --name=CreateUser
 ```
 
 Para rodar as migrations e atualizar o banco de dados local:
 
 ```
-npx sequelize db:migrate
+yarn sequelize db:migrate
 ```
 
 Para reverter uma migration:
 
 ```
-npx sequelize db:migrate:undo
+yarn sequelize db:migrate:undo
 ```
 
 ## Testes
@@ -44,5 +44,5 @@ npx sequelize db:migrate:undo
 Para rodar os testes da aplicação:
 
 ```
-npm run test
+yarn test
 ```
