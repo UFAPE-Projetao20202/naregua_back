@@ -11,6 +11,10 @@ class AddressesRepository {
       country,
     });
   }
+
+  async update({ id, updateAddressDto }) {
+    return await Address.update(updateAddressDto, { where: { id } });
+  }
 }
 
 module.exports = { AddressesRepository };

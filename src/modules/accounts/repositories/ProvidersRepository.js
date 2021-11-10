@@ -34,6 +34,13 @@ class ProvidersRepository {
   async findByUserId(user_id) {
     return await Provider.findOne({ where: { user_id } });
   }
+
+  async updateProviderAddress({ provider_id, address_id }) {
+    return await Provider.update(
+      { address_id },
+      { where: { id: provider_id } },
+    );
+  }
 }
 
 module.exports = { ProvidersRepository };
