@@ -1,5 +1,5 @@
 # NaRegua Back end (API)
-
+[![Codacy Badge](https://app.codacy.com/project/badge/Grade/79c611f232a94724a82a85ca63f066f1)](https://www.codacy.com/gh/UFAPE-Projetao20202/naregua_back/dashboard?utm_source=github.com&amp;utm_medium=referral&amp;utm_content=UFAPE-Projetao20202/naregua_back&amp;utm_campaign=Badge_Grade)
 ## Instruções para inicializar a aplicação localmente.
 
 Crie um arquivo .env na raiz do projeto, copie as variaveis do arquivo .env.example e preencha com as suas configurações de banco.
