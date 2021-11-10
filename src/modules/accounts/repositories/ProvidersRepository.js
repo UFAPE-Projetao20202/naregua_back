@@ -12,6 +12,24 @@ class ProvidersRepository {
   }
 
   async findAll({ name = '', state = '', city = '' }) {
+    // adiciona as opções de filtragem de endereço;
+    let whereAddress = {};
+    if (state && state.trim()) {
+      whereAddress.state = {
+        [Op.iLike]: `%${state}%`,
+      };
+    }
+
+    if (city && city.trim()) {
+      whereAddress.city = {
+        [Op.iLike]: `%${city}%`,
+      };
+    }
+
+    if (Object.keys(whereAddress).length === 0) {
+      whereAddress = null;
+    }
+
     return await Provider.findAll({
       include: [
         {
@@ -33,14 +51,7 @@ class ProvidersRepository {
             'state',
             'country',
           ],
-          where: {
-            state: {
-              [Op.iLike]: `%${state}%`,
-            },
-            city: {
-              [Op.iLike]: `%${city}%`,
-            },
-          },
+          where: whereAddress,
         },
       ],
     });
