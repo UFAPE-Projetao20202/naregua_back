@@ -11,7 +11,7 @@ class ProvidersRepository {
     return provider;
   }
 
-  async findAll({ name }) {
+  async findAll({ name = '', state = '', city = '' }) {
     return await Provider.findAll({
       include: [
         {
@@ -20,6 +20,25 @@ class ProvidersRepository {
           where: {
             name: {
               [Op.iLike]: `%${name}%`,
+            },
+          },
+        },
+        {
+          association: 'address',
+          attributes: [
+            'zip_code',
+            'street',
+            'neighborhood',
+            'city',
+            'state',
+            'country',
+          ],
+          where: {
+            state: {
+              [Op.iLike]: `%${state}%`,
+            },
+            city: {
+              [Op.iLike]: `%${city}%`,
             },
           },
         },
