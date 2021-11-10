@@ -47,7 +47,7 @@ yarn test
 
 ## Instruções para inicializar a aplicação com o Docker
 
-Crie um arquivo .env na raiz do projeto, copie as variaveis do arquivo .env.example e preencha com as suas configurações de banco.\
+Crie um arquivo .env na raiz do projeto, copie as variaveis do arquivo .env.example e preencha com as suas configurações de banco.
 
 *OBS.: Utilizando o docker, atribua o DB_HOST=db_naregua
 
