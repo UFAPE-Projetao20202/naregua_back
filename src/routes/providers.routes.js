@@ -1,4 +1,7 @@
 const { Router } = require('express');
+const { ensureAuthenticated } = require('../middlewares/ensureAuthenticated');
+const { ensureProvider } = require('../middlewares/ensureProvider');
+
 const {
   CreateAddressProviderController,
 } = require('../modules/accounts/useCases/createAddressProvider/CreateAddressProviderController');
@@ -21,6 +24,8 @@ providersRoutes.post(
 
 providersRoutes.post(
   '/address',
+  ensureAuthenticated,
+  ensureProvider,
   createAddressProviderController.handle.bind(createAddressProviderController),
 );
 
