@@ -23,6 +23,10 @@ class ServiceRepository {
     });
     return service;
   }
+
+  async findAll(){
+    return await Service.findAll();
+  }
 }
 
 module.exports = { ServiceRepository };
