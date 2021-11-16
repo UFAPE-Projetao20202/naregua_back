@@ -27,9 +27,11 @@ class ServiceRepository {
 
   async findAll() {
     return await Service.findAll({
+      attributes: ['id', 'name', 'description', 'value', 'duration', 'discount', 'available'],
       include: [
         {
           association: 'provider',
+          attributes: ['active'],
           include: [
             {
               association: 'user',
@@ -49,7 +51,8 @@ class ServiceRepository {
           ],
         },
         {
-          association: 'category'
+          association: 'category',
+          attributes: ['id', 'description']
         }
       ]
     });
