@@ -1,4 +1,5 @@
 const { Service } = require('../models/Service');
+const { Op } = require('sequelize');
 
 class ServiceRepository {
   async create({
@@ -24,9 +25,35 @@ class ServiceRepository {
     return service;
   }
 
-  async findAll(){
-    return await Service.findAll();
-  }
+  async findAll() {
+    return await Service.findAll({
+      include: [
+        {
+          association: 'provider',
+          include: [
+            {
+              association: 'user',
+              attributes: ['name', 'email', 'phone'],             
+            },
+            // {
+            //   association: 'address',
+            //   attributes: [
+            //     'zip_code',
+            //     'street',
+            //     'neighborhood',
+            //     'city',
+            //     'state',
+            //     'country',
+            //   ],
+            // },
+          ],
+        },
+        {
+          association: 'category'
+        }
+      ]
+    });
+}
 }
 
 module.exports = { ServiceRepository };
