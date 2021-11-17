@@ -17,6 +17,10 @@ class Provider extends Model {
           type: DataTypes.BOOLEAN,
           allowNull: false,
         },
+        address_id: {
+          type: DataTypes.UUID,
+          references: { model: 'addresses', key: 'id' },
+        },
       },
       {
         sequelize: connection,
@@ -26,6 +30,7 @@ class Provider extends Model {
 
   static associate(models) {
     this.belongsTo(models.User, { foreignKey: 'user_id', as: 'user' });
+    this.belongsTo(models.Address, { foreignKey: 'address_id', as: 'address' });
   }
 }
 

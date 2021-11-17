@@ -10,7 +10,7 @@ class CreateServiceUseCase {
     description,
     value,
     duration,
-    discount,
+    discount = 0,
     available = true,
     category_id,
     provider_id,
@@ -22,7 +22,7 @@ class CreateServiceUseCase {
 
     if (!value || !String(value).trim()) throw new AppError('Informe o valor.');
 
-    if (!discount || isNaN(discount))
+    if (discount === null || discount === undefined || isNaN(discount))
       throw new AppError('Informe o desconto corretamente (number).');
 
     if (!duration || isNaN(duration))
