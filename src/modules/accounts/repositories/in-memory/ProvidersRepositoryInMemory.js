@@ -1,8 +1,9 @@
 const { v4: uuidv4 } = require('uuid');
 
 class ProvidersRepositoryInMemory {
-  constructor() {
+  constructor(usersRepository) {
     this.providers = [];
+    this.usersRepository = usersRepository;
   }
 
   async create({ user_id }) {
@@ -19,6 +20,20 @@ class ProvidersRepositoryInMemory {
     this.providers.push(provider);
 
     return provider;
+  }
+
+  async findAll({ name }) {
+    await this.providers.map(async provider => {
+      provider.user = await this.usersRepository.findById(provider.user_id);
+      if (provider.user) delete provider.user.password;
+    });
+
+    if (name)
+      return this.providers.filter(provider =>
+        provider.user.name.includes(name),
+      );
+
+    return this.providers;
   }
 
   async findById(id) {
