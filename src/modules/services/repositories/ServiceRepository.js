@@ -37,17 +37,17 @@ class ServiceRepository {
               association: 'user',
               attributes: ['name', 'email', 'phone'],             
             },
-            // {
-            //   association: 'address',
-            //   attributes: [
-            //     'zip_code',
-            //     'street',
-            //     'neighborhood',
-            //     'city',
-            //     'state',
-            //     'country',
-            //   ],
-            // },
+            {
+              association: 'address',
+              attributes: [
+                'zip_code',
+                'street',
+                'neighborhood',
+                'city',
+                'state',
+                'country',
+              ],
+            },
           ],
         },
         {
