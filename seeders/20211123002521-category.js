@@ -25,7 +25,7 @@ module.exports = {
         },
         {
           id: '9d73c212-80ef-4b38-b8b7-a1067f4e8b9f',
-          description: 'Sombrancelha',
+          description: 'Sobrancelha',
           created_at: new Date(),
           updated_at: new Date(),
         },
