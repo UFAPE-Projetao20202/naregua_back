@@ -9,6 +9,10 @@ class Address extends Model {
           defaultValue: Sequelize.UUIDV4,
           primaryKey: true,
         },
+        name: {
+          type: DataTypes.STRING,
+          allowNull: false,
+        },
         zip_code: {
           type: DataTypes.STRING,
           allowNull: false,

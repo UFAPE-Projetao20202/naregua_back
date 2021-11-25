@@ -5,7 +5,9 @@ class CreateAddressUseCase {
     this.addressesRepository = addressesRepository;
   }
 
-  async execute({ zip_code, street, neighborhood, city, state, country }) {
+  async execute({ name, zip_code, street, neighborhood, city, state, country }) {
+    if(!name || !String(name).trim()) throw new AppError('Informe o nome!');
+
     if (!zip_code || !String(zip_code).trim())
       throw new AppError('Informe o CEP!');
 
@@ -23,6 +25,7 @@ class CreateAddressUseCase {
       throw new AppError('Informe o país!');
 
     return await this.addressesRepository.create({
+      name,
       zip_code,
       street,
       neighborhood,
