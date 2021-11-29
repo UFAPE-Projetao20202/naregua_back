@@ -8,7 +8,9 @@ class CategoryRepository {
   }  
 
   async findAll() {
-    return await Category.findAll();
+    return await Category.findAll({
+      order: [['description', 'ASC']]
+    });
   }
 }
 
