@@ -1,3 +1,4 @@
+const { STRING } = require('sequelize');
 const AppError = require('../../../../errors/AppError');
 
 class UpdateAddressUseCase {
@@ -5,10 +6,12 @@ class UpdateAddressUseCase {
     this.addressesRepository = addressesRepository;
   }
 
-  async execute({ id, zip_code, street, neighborhood, city, state, country }) {
+  async execute({ id, name, zip_code, street, neighborhood, city, state, country }) {
     const updateAddressDto = {};
 
     if (!id) throw new AppError('Informe o id do endereço!');
+
+    if (name && String(name).trim()) updateAddressDto.name = name;
 
     if (zip_code && String(zip_code).trim())
       updateAddressDto.zip_code = zip_code;

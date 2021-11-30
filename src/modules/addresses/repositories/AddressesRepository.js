@@ -1,8 +1,9 @@
 const { Address } = require('../models/Address');
 
 class AddressesRepository {
-  async create({ zip_code, street, neighborhood, city, state, country }) {
+  async create({ name, zip_code, street, neighborhood, city, state, country }) {
     return await Address.create({
+      name,
       zip_code,
       street,
       neighborhood,
