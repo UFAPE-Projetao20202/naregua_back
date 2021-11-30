@@ -7,8 +7,9 @@ class ListServicesController {
     this.listServicesUseCase = new ListServicesUseCase(servicesRepository);
   }
   async handle(request, response) {
+    const { filter } = request.body;
 
-    const services = await this.listServicesUseCase.execute();
+    const services = await this.listServicesUseCase.execute({filter});
 
     return response.status(201).json(services);
   }

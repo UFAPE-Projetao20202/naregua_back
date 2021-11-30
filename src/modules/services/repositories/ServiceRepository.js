@@ -25,9 +25,19 @@ class ServiceRepository {
     return service;
   }
 
-  async findAll() {
+  async findAll({ filter = '' }) {
     return await Service.findAll({
       attributes: ['id', 'name', 'description', 'value', 'duration', 'discount', 'available'],
+      where: {
+        [Op.or]: {
+          description: {
+            [Op.iLike]: `%${filter}%`
+          },
+          name: {
+            [Op.iLike]: `%${filter}%`
+          }
+        }
+      },
       include: [
         {
           association: 'provider',
@@ -35,7 +45,7 @@ class ServiceRepository {
           include: [
             {
               association: 'user',
-              attributes: ['name', 'email', 'phone'],             
+              attributes: ['name', 'email', 'phone'],
             },
             {
               association: 'address',
@@ -56,7 +66,7 @@ class ServiceRepository {
         }
       ]
     });
-}
+  }
 }
 
 module.exports = { ServiceRepository };
