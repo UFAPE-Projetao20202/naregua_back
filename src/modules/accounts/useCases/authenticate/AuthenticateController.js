@@ -3,14 +3,19 @@ const { UsersRepository } = require('../../repositories/UsersRepository');
 const {
   ProvidersRepository,
 } = require('../../repositories/ProvidersRepository');
+const {
+  ClientsRepository,
+} = require('../../repositories/ClientsRepository');
 
 class AuthenticateController {
   constructor() {
     const usersRepository = new UsersRepository();
     const providersRepository = new ProvidersRepository();
+    const clientsRepository = new ClientsRepository();
     this.authenticateUseCase = new AuthenticateUseCase(
       usersRepository,
       providersRepository,
+      clientsRepository,
     );
   }
 
