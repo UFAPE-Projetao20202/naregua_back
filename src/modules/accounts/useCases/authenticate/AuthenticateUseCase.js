@@ -41,7 +41,7 @@ class AuthenticateUseCase {
     });
 
     return {
-      user: { name: user.name, email: user.email, is_provider: !!provider },
+      user: { name: user.name, email: user.email, is_provider: !!provider, is_client: !!client },
       token,
     };
   }

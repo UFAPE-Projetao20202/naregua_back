@@ -8,7 +8,7 @@ const {
   ClientsRepositoryInMemory,
 } = require('../../repositories/in-memory/ClientsRepositoryInMemory');
 const {
-  CreateClientClientUseCase,
+  CreateClientUseCase,
 } = require('../createClient/CreateClientUseCase');
 
 let usersRepository;
