@@ -3,7 +3,7 @@ const databaseConfig = require('../config/database');
 
 const { User } = require('../modules/accounts/models/User');
 const { Provider } = require('../modules/accounts/models/Provider');
-const {Client } = require('../modules/accounts/models/Client');
+const { Client } = require('../modules/accounts/models/Client');
 const { Category } = require('../modules/services/models/Category');
 const { Service } = require('../modules/services/models/Service');
 const { Address } = require('../modules/addresses/models/Address');
