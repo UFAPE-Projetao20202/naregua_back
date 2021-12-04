@@ -6,9 +6,10 @@ class ListServicesUseCase {
     this.servicesRepository = servicesRepository;
   }
 
-  async execute() {
-    
-    const service = await this.servicesRepository.findAll();
+  async execute({ filter }) {
+    const service = await this.servicesRepository.findAll({
+      filter
+    });
 
     return service;
   }
