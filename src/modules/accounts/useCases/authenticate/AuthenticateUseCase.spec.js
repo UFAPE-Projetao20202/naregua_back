@@ -8,20 +8,26 @@ const {
 const {
   ProvidersRepositoryInMemory,
 } = require('../../repositories/in-memory/ProvidersRepositoryInMemory');
+const {
+  ClientsRepositoryInMemory,
+} = require('../../repositories/in-memory/ClientsRepositoryInMemory');
 const { CreateUserUseCase } = require('../createUser/CreateUserUseCase');
 
 let authenticateUseCase;
 let createUserUseCase;
 let usersRepository;
 let providersRepository;
+let clientsRepository;
 
 describe('Login de usuário', () => {
   beforeEach(() => {
     usersRepository = new UsersRepositoryInMemory();
     providersRepository = new ProvidersRepositoryInMemory();
+    clientsRepository = new ClientsRepositoryInMemory();
     authenticateUseCase = new AuthenticateUseCase(
       usersRepository,
       providersRepository,
+      clientsRepository,
     );
     createUserUseCase = new CreateUserUseCase(usersRepository);
   });

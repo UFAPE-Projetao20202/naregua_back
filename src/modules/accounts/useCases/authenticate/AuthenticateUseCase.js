@@ -5,9 +5,10 @@ const AppError = require('../../../../errors/AppError');
 const { SECRET } = require('../../../../config/secret');
 
 class AuthenticateUseCase {
-  constructor(usersRepository, providersRepository) {
+  constructor(usersRepository, providersRepository, clientsRepository) {
     this.usersRepository = usersRepository;
     this.providersRepository = providersRepository;
+    this.clientsRepository = clientsRepository;
   }
 
   async execute({ email, password }) {
@@ -25,6 +26,9 @@ class AuthenticateUseCase {
     // verifica se é um prestador.
     const provider = await this.providersRepository.findByUserId(user.id);
 
+    //verifica se é um cliente
+    const client = await this.clientsRepository.findByUserId(user.id);
+
     // compara as senhas.
     const passwordMatch = await compare(password, user.password);
 
@@ -37,7 +41,7 @@ class AuthenticateUseCase {
     });
 
     return {
-      user: { name: user.name, email: user.email, is_provider: !!provider },
+      user: { name: user.name, email: user.email, is_provider: !!provider, is_client: !!client },
       token,
     };
   }
