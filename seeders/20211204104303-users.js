@@ -1,4 +1,5 @@
 const { v4: uuidv4 } = require('uuid');
+const { hash } = require('bcryptjs');
 'use strict';
 
 module.exports = {
@@ -11,7 +12,7 @@ module.exports = {
             name: 'Isidoro Beto',
             email: 'isi@email.com',
             phone: '87999999999',
-            password: '123456',
+            password: (await hash('123456', 8)),
             created_at: new Date(),
             updated_at: new Date(),
         },
@@ -20,7 +21,7 @@ module.exports = {
             name: 'José Feitosa',
             email: 'jft@email.com',
             phone: '87888888888',
-            password: '123456',
+            password: (await hash('123456', 8)),
             created_at: new Date(),
             updated_at: new Date(),
         },
@@ -29,7 +30,7 @@ module.exports = {
             name: 'João vitu',
             email: 'jvitu@email.com',
             phone: '87444444444',
-            password: '123456',
+            password: (await hash('123456', 8)),
             created_at: new Date(),
             updated_at: new Date(),
         },

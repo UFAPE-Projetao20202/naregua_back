@@ -20,7 +20,7 @@ class AuthenticateUseCase {
     // verifica se o usuário existe.
     const user = await this.usersRepository.findByEmail(email);
 
-    if (!user) throw new AppError('Email ou senha incorretos!');
+    if (!user) throw new AppError('Email não existe!');
 
     // verifica se é um prestador.
     const provider = await this.providersRepository.findByUserId(user.id);
@@ -28,7 +28,7 @@ class AuthenticateUseCase {
     // compara as senhas.
     const passwordMatch = await compare(password, user.password);
 
-    if (!passwordMatch) throw new AppError('Email ou senha incorretos!');
+    if (!passwordMatch) throw new AppError('Senha incorreta!');
 
     // gera o token para autenticação.
     const token = sign({}, SECRET, {
