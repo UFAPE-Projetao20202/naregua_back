@@ -76,7 +76,7 @@ class ProvidersRepository {
           attributes: ['name', 'email', 'phone'],
           where: {
             name: {
-              [Op.iLike]: `%${name.toLowerCase().normalize("NFD").replace(/[\u0300-\u036f]/g, "")}%`,
+              [Op.iLike]: `%${name}%`,
             },
           },
         },
