@@ -1,21 +1,19 @@
 const {
   ProvidersRepository,
 } = require('../../repositories/ProvidersRepository');
-const { SearchProvidersUseCase } = require('./SearchProvidersUseCase');
+const { SearchProviderUseCase } = require('./SearchProviderUseCase');
 
-class SearchProvidersController {
+class SearchProviderController {
   constructor() {
     const providersRepository = new ProvidersRepository();
-    this.listProviders = new SearchProvidersUseCase(providersRepository);
+    this.listProviders = new SearchProviderUseCase(providersRepository);
   }
 
   async handle(request, response) {
-    const { name, state, city } = request.query;
-
-    const providers = await this.listProviders.execute({ name, state, city });
-
+    const { name } = request.body;
+    const providers = await this.listProviders.execute({ name });
     return response.json(providers);
   }
 }
 
-module.exports = { SearchProvidersController };
+module.exports = { SearchProviderController };

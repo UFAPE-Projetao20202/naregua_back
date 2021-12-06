@@ -2,7 +2,7 @@ class SearchProviderUseCase {
   constructor(providersRepository) {
     this.providersRepository = providersRepository;
   }
-  async execute({ name, state, city }) {
+  async execute({ name }) {
     const providers = await this.providersRepository.findNameGeneric({name});
     return providers;
   }

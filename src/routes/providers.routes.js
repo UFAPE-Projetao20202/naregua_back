@@ -11,11 +11,15 @@ const {
 const {
   ListProvidersController,
 } = require('../modules/accounts/useCases/listProviders/ListProvidersController');
+const {
+    SearchProviderController,
+} = require('../modules/accounts/useCases/searchProvider/SearchProviderController')
 
 const providersRoutes = Router();
 const createProviderController = new CreateProviderController();
 const createAddressProviderController = new CreateAddressProviderController();
 const listProvidersController = new ListProvidersController();
+const searchProviderController = new SearchProviderController();
 
 providersRoutes.post(
   '/',
@@ -32,6 +36,11 @@ providersRoutes.post(
 providersRoutes.get(
   '/',
   listProvidersController.handle.bind(listProvidersController),
+);
+
+providersRoutes.post(
+  '/searchProvider',
+  searchProviderController.handle.bind(searchProviderController),
 );
 
 module.exports = { providersRoutes };
