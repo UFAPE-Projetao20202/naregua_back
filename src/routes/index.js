@@ -6,6 +6,7 @@ const { clientsRoutes } = require('./clients.routes');
 const { servicesRoutes } = require('./services.routes');
 const { categoriesRoutes } = require('./categories.routes');
 const { solicitationsRoutes } = require('./solicitations.routes');
+const { ratingsRoutes } = require('./ratings.routes');
 
 const routes = Router();
 
@@ -17,6 +18,7 @@ routes.use('/clients', clientsRoutes);
 routes.use('/services', servicesRoutes);
 routes.use('/categories', categoriesRoutes);
 routes.use('/solicitations', solicitationsRoutes);
+routes.use('/ratings', ratingsRoutes);
 routes.use(authenticateRoutes);
 
 module.exports = routes;
