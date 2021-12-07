@@ -27,16 +27,24 @@ class ServiceRepository {
 
   async findAll({ filter = '' }) {
     return await Service.findAll({
-      attributes: ['id', 'name', 'description', 'value', 'duration', 'discount', 'available'],
+      attributes: [
+        'id',
+        'name',
+        'description',
+        'value',
+        'duration',
+        'discount',
+        'available',
+      ],
       where: {
         [Op.or]: {
           description: {
-            [Op.iLike]: `%${filter}%`
+            [Op.iLike]: `%${filter}%`,
           },
           name: {
-            [Op.iLike]: `%${filter}%`
-          }
-        }
+            [Op.iLike]: `%${filter}%`,
+          },
+        },
       },
       include: [
         {
@@ -62,10 +70,14 @@ class ServiceRepository {
         },
         {
           association: 'category',
-          attributes: ['id', 'description']
-        }
-      ]
+          attributes: ['id', 'description'],
+        },
+      ],
     });
+  }
+
+  async findById(id) {
+    return await Service.findByPk(id);
   }
 }
 

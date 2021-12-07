@@ -7,8 +7,23 @@ const { Client } = require('../modules/accounts/models/Client');
 const { Category } = require('../modules/services/models/Category');
 const { Service } = require('../modules/services/models/Service');
 const { Address } = require('../modules/addresses/models/Address');
+const {
+  Solicitation,
+} = require('../modules/solicitations/models/Solicitation');
+const {
+  ServicesSolicitation,
+} = require('../modules/solicitations/models/ServiceSolicitation');
 
-const models = [User, Provider, Client, Category, Service, Address];
+const models = [
+  User,
+  Provider,
+  Client,
+  Category,
+  Service,
+  Address,
+  Solicitation,
+  ServicesSolicitation,
+];
 
 class Database {
   constructor() {
