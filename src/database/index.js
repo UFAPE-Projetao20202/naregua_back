@@ -13,6 +13,7 @@ const {
 const {
   ServicesSolicitation,
 } = require('../modules/solicitations/models/ServiceSolicitation');
+const { Rating } = require('../modules/services/models/Rating');
 
 const models = [
   User,
@@ -23,6 +24,7 @@ const models = [
   Address,
   Solicitation,
   ServicesSolicitation,
+  Rating,
 ];
 
 class Database {
