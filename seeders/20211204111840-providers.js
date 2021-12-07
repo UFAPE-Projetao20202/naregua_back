@@ -14,7 +14,7 @@ module.exports = {
               updated_at: new Date(),
           },
           {
-                id: uuidv4(),
+                id: '32d4e1a7-aee4-42a7-83e2-77521e51b821',
                 user_id: '52e4e1d7-aee3-42a5-87e2-77621e51b831',
                 active: true,
                 created_at: new Date(),

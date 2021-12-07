@@ -58,6 +58,19 @@ module.exports = {
             created_at: new Date(),
             updated_at: new Date(),
         },
+        {
+            id: uuidv4(),
+            name: "Cabeça de cuia",
+            description: "Um corte arredondado",
+            value: 20.0,
+            duration: 90,
+            discount: 0.0,
+            available: true,
+            category_id: '31d3e1d4-dee9-49a5-82e2-39620d51b638', // corte de cabelo
+            provider_id:'32d4e1a7-aee4-42a7-83e2-77521e51b821',
+            created_at: new Date(),
+            updated_at: new Date(),
+        },
         ],
         {}
     );
