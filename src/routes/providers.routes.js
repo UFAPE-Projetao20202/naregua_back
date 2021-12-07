@@ -1,6 +1,7 @@
 const { Router } = require('express');
 const { ensureAuthenticated } = require('../middlewares/ensureAuthenticated');
 const { ensureProvider } = require('../middlewares/ensureProvider');
+const { ensureClient } = require('../middlewares/ensureClient');
 
 const {
   CreateAddressProviderController,
@@ -12,14 +13,27 @@ const {
   ListProvidersController,
 } = require('../modules/accounts/useCases/listProviders/ListProvidersController');
 const {
-    SearchProviderController,
-} = require('../modules/accounts/useCases/searchProvider/SearchProviderController')
+  SearchProviderController,
+} = require('../modules/accounts/useCases/searchProvider/SearchProviderController');
+const {
+  ListSolicitationsController,
+} = require('../modules/solicitations/useCases/listSolicitations/ListSolicitationsController');
+const {
+  ListSolicitationsClientController
+} = require('../modules/solicitations/useCases/listSolicitationsClient/ListSolicitationsClientController');
+const {
+  AlterStatusSolicitationController,
+} = require('../modules/solicitations/useCases/alterStatusSolicitation/AlterStatusSolicitationController');
 
 const providersRoutes = Router();
 const createProviderController = new CreateProviderController();
 const createAddressProviderController = new CreateAddressProviderController();
 const listProvidersController = new ListProvidersController();
 const searchProviderController = new SearchProviderController();
+const listSolicitationsController = new ListSolicitationsController();
+const listSolicitationsClientController = new ListSolicitationsClientController();
+const alterStatusSolicitationController =
+  new AlterStatusSolicitationController();
 
 providersRoutes.post(
   '/',
@@ -41,6 +55,29 @@ providersRoutes.get(
 providersRoutes.post(
   '/searchProvider',
   searchProviderController.handle.bind(searchProviderController),
+);
+
+providersRoutes.get(
+  '/listSolicitationsProvider',
+  ensureAuthenticated,
+  ensureProvider,
+  listSolicitationsController.handle.bind(listSolicitationsController),
+);
+
+providersRoutes.get(
+  '/listSolicitationsClient',
+  ensureAuthenticated,
+  ensureClient,
+  listSolicitationsController.handle.bind(listSolicitationsController),
+);
+
+providersRoutes.put(
+  '/alterStatusSolicitation/:id',
+  ensureAuthenticated,
+  ensureProvider,
+  alterStatusSolicitationController.handle.bind(
+    alterStatusSolicitationController,
+  ),
 );
 
 module.exports = { providersRoutes };
