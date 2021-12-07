@@ -1,5 +1,7 @@
 const { Service } = require('../models/Service');
 const { Op } = require('sequelize');
+const { validate } = require('uuid');
+const AppError = require('../../../errors/AppError');
 
 class ServiceRepository {
   async create({
@@ -25,7 +27,16 @@ class ServiceRepository {
     return service;
   }
 
-  async findAll({ filter = '' }) {
+  async findAll({ filter = '', id_category = '' }) {
+    let whereAddress = {};
+    if (id_category && id_category.trim()) {
+      if(validate(id_category)){
+        whereAddress.id = id_category;
+      }else{
+        throw new AppError('UUID de categoria inválido!', 400); 
+      }      
+    }
+
     return await Service.findAll({
       attributes: ['id', 'name', 'description', 'value', 'duration', 'discount', 'available'],
       where: {
@@ -62,7 +73,8 @@ class ServiceRepository {
         },
         {
           association: 'category',
-          attributes: ['id', 'description']
+          attributes: ['id', 'description'],
+          where: whereAddress
         }
       ]
     });
