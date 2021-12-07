@@ -44,6 +44,11 @@ class Solicitation extends Model {
       foreignKey: 'client_id',
       as: 'client',
     });
+    this.belongsToMany(models.Service, {
+      foreignKey: 'solicitation_id',
+      through: 'services_solicitations',
+      as: 'services'
+    })
   }
 }
 
