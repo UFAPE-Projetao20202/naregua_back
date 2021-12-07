@@ -28,26 +28,34 @@ class ServiceRepository {
   }
 
   async findAll({ filter = '', id_category = '' }) {
-    let whereAddress = {};
+    let whereCategory = {};
     if (id_category && id_category.trim()) {
-      if(validate(id_category)){
-        whereAddress.id = id_category;
-      }else{
-        throw new AppError('UUID de categoria inválido!', 400); 
-      }      
+      if (validate(id_category)) {
+        whereCategory.id = id_category;
+      } else {
+        throw new AppError('UUID de categoria inválido!', 400);
+      }
     }
 
     return await Service.findAll({
-      attributes: ['id', 'name', 'description', 'value', 'duration', 'discount', 'available'],
+      attributes: [
+        'id',
+        'name',
+        'description',
+        'value',
+        'duration',
+        'discount',
+        'available',
+      ],
       where: {
         [Op.or]: {
           description: {
-            [Op.iLike]: `%${filter}%`
+            [Op.iLike]: `%${filter}%`,
           },
           name: {
-            [Op.iLike]: `%${filter}%`
-          }
-        }
+            [Op.iLike]: `%${filter}%`,
+          },
+        },
       },
       include: [
         {
@@ -74,10 +82,14 @@ class ServiceRepository {
         {
           association: 'category',
           attributes: ['id', 'description'],
-          where: whereAddress
-        }
-      ]
+          where: whereCategory,
+        },
+      ],
     });
+  }
+
+  async findById(id) {
+    return await Service.findByPk(id);
   }
 }
 
