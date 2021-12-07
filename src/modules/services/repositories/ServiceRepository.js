@@ -1,5 +1,7 @@
 const { Service } = require('../models/Service');
 const { Op } = require('sequelize');
+const { validate } = require('uuid');
+const AppError = require('../../../errors/AppError');
 
 class ServiceRepository {
   async create({
@@ -25,18 +27,35 @@ class ServiceRepository {
     return service;
   }
 
-  async findAll({ filter = '' }) {
+  async findAll({ filter = '', id_category = '' }) {
+    let whereCategory = {};
+    if (id_category && id_category.trim()) {
+      if (validate(id_category)) {
+        whereCategory.id = id_category;
+      } else {
+        throw new AppError('UUID de categoria inválido!', 400);
+      }
+    }
+
     return await Service.findAll({
-      attributes: ['id', 'name', 'description', 'value', 'duration', 'discount', 'available'],
+      attributes: [
+        'id',
+        'name',
+        'description',
+        'value',
+        'duration',
+        'discount',
+        'available',
+      ],
       where: {
         [Op.or]: {
           description: {
-            [Op.iLike]: `%${filter}%`
+            [Op.iLike]: `%${filter}%`,
           },
           name: {
-            [Op.iLike]: `%${filter}%`
-          }
-        }
+            [Op.iLike]: `%${filter}%`,
+          },
+        },
       },
       include: [
         {
@@ -62,10 +81,15 @@ class ServiceRepository {
         },
         {
           association: 'category',
-          attributes: ['id', 'description']
-        }
-      ]
+          attributes: ['id', 'description'],
+          where: whereCategory,
+        },
+      ],
     });
+  }
+
+  async findById(id) {
+    return await Service.findByPk(id);
   }
 }
 
