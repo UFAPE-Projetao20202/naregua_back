@@ -7,7 +7,7 @@ module.exports = {
           'providers',
           [
           {
-              id: uuidv4(),
+              id: '42d4d1d4-dfe1-43a5-85e2-37721a51b359',
               user_id: '32d4e1d4-dee1-48a5-81e2-37621d51b639',
               active: true,
               created_at: new Date(),
