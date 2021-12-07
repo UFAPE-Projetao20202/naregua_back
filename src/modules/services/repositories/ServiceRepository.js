@@ -60,7 +60,7 @@ class ServiceRepository {
       include: [
         {
           association: 'provider',
-          attributes: ['active'],
+          attributes: ['active', 'id'],
           include: [
             {
               association: 'user',
