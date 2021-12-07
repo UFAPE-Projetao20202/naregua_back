@@ -22,6 +22,21 @@ class ProvidersRepositoryInMemory {
     return provider;
   }
 
+    async findNameGeneric({ name }) {
+        await this.providers.map(async provider => {
+          provider.user = await this.usersRepository.findById(provider.user_id);
+          if (provider.user) delete provider.user.password;
+        });
+
+        if (name)
+          return this.providers.filter(provider =>
+            provider.user.name.toLowerCase().normalize("NFD").replace(/[\u0300-\u036f]/g, "")
+                .includes(name.toLowerCase().normalize("NFD").replace(/[\u0300-\u036f]/g, "")),
+          );
+
+        return this.providers;
+      }
+
   async findAll({ name }) {
     await this.providers.map(async provider => {
       provider.user = await this.usersRepository.findById(provider.user_id);

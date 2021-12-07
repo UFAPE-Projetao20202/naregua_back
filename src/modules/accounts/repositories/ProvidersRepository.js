@@ -1,4 +1,5 @@
 const { Provider } = require('../models/Provider');
+const {User} = require('../models/User');
 const { Op } = require('sequelize');
 
 class ProvidersRepository {
@@ -9,6 +10,44 @@ class ProvidersRepository {
     });
 
     return provider;
+  }
+
+  async findNameGeneric({name}) {
+    var providers = await Provider.findAll({raw: true});
+    var users = await User.findAll({raw: true});
+    var providersUsers = []
+
+    await providers.forEach(async provider => {
+        const prov = {};
+
+        await users.forEach(async user => {
+            if (user.id == provider.user_id){
+                const us = {};
+                Object.assign(us, {
+                    id: user.id,
+                    name: user.name,
+                    email: user.email
+                });
+
+                Object.assign(prov, {
+                  id: provider.id,
+                  user_id: provider.user_id,
+                  active: provider.active,
+                  createdAt: provider.createdAt,
+                  updatedAt: provider.updatedAt,
+                  user: us
+                });
+            }
+        });
+        providersUsers.push(prov);
+    });
+
+    if (name)
+        return providersUsers.filter(provider =>
+            provider.user.name.toLowerCase().normalize("NFD").replace(/[\u0300-\u036f]/g, "")
+                .includes(name.toLowerCase().normalize("NFD").replace(/[\u0300-\u036f]/g, "")),
+        );
+    return [];
   }
 
   async findAll({ name = '', state = '', city = '' }) {
